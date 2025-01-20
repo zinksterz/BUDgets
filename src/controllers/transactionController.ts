@@ -28,7 +28,7 @@ export const addTransaction = async (req:Request , res: Response): Promise<void>
             Item: {
                 id: { S: newTransaction.id},
                 product: {S: newTransaction.product},
-                price: {S: newTransaction.price.toString()},
+                price: {N: newTransaction.price.toString()},
                 reason: {S: newTransaction.reason},
                 status: {S: newTransaction.status},
                 timestamp: {S: newTransaction.timestamp},
@@ -49,7 +49,7 @@ export const getTransactions = async (req:Request , res: Response): Promise<void
         const transactions = data.Items?.map(item => ({
             id: item.id.S,
             product: item.product.S,
-            price: Number(item.price.N),
+            price: item.price ? Number(item.price.N): null,
             reason: item.reason.S,
             status: item.status.S,
             timestamp: item.timestamp.S,
