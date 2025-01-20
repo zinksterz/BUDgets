@@ -13,6 +13,21 @@ export const addTransaction = async (req:Request , res: Response): Promise<void>
         return;
     }
 
+    if(typeof product !=="string"){
+        res.status(400).json({message:"Product must be a valid string."});
+        return;
+    }
+
+    if (typeof reason !== "string") {
+    res.status(400).json({ message: "Reason must be a valid string." });
+    return;
+  }
+
+    if (typeof price !== "number" || price <= 0) {
+    res.status(400).json({ message: "Price must be a positive number." });
+    return;
+  }
+
     const newTransaction: Transaction = {
         id: uuidv4(),
         product,
