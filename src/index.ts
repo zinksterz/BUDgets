@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 
 //middleware
 app.use(cors({
-    origin:"http://localhost:3001",
+    origin: process.env.FRONTEND_URL || "http://localhost:3001",
     methods:"GET,POST,PATCH,DELETE",
     credentials:true
 }));
@@ -27,6 +27,6 @@ app.get("/", (req, res) => {
 });
 
 //Start Server
-app.listen(port, () =>{
-    console.log(`Server is running on http://localhost:${port}.`);
+app.listen(port || 8080, () =>{
+    console.log(`Server is running on port: ${port || 8080}`);
 });
